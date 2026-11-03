@@ -4,7 +4,7 @@ import 'dart:io';
 import 'api_client.dart';
 
 class DiscoveryService {
-  /// Scan the local network subnet for an OnlyAudio server on port 5000.
+  /// Scan the local network subnet for an Melophily server on port 5000.
   /// Returns a list of base URLs like "http://192.168.1.42:5000".
   Future<List<String>> scanNetwork({int port = 5000}) async {
     final results = <String>[];

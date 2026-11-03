@@ -1,11 +1,11 @@
 [Setup]
 AppId={{A1B2C3D4-E5F6-7890-ABCD-EF1234567890}
-AppName=OnlyAudio
+AppName=Melophily
 AppVersion=2.5.0-beta.2
 AppPublisher=AudioFeel
 AppPublisherURL=https://github.com/onlyaudio
 DefaultDirName={autopf}\OnlyAudio
-DefaultGroupName=OnlyAudio
+DefaultGroupName=Melophily
 AllowNoIcons=yes
 OutputDir=installer_output
 OutputBaseFilename=OnlyAudio_Setup
@@ -31,12 +31,12 @@ Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{
 Source: "build\windows\x64\runner\Release\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
 
 [Icons]
-Name: "{group}\OnlyAudio"; Filename: "{app}\onlyaudio_by_audiofeel.exe"; IconFilename: "{app}\onlyaudio_by_audiofeel.exe"
-Name: "{group}\Désinstaller OnlyAudio"; Filename: "{uninstallexe}"
-Name: "{autodesktop}\OnlyAudio"; Filename: "{app}\onlyaudio_by_audiofeel.exe"; Tasks: desktopicon
+Name: "{group}\Melophily"; Filename: "{app}\onlyaudio_by_audiofeel.exe"; IconFilename: "{app}\onlyaudio_by_audiofeel.exe"
+Name: "{group}\Désinstaller Melophily"; Filename: "{uninstallexe}"
+Name: "{autodesktop}\Melophily"; Filename: "{app}\onlyaudio_by_audiofeel.exe"; Tasks: desktopicon
 
 [Run]
-Filename: "{app}\onlyaudio_by_audiofeel.exe"; Description: "Lancer OnlyAudio"; Flags: nowait postinstall skipifsilent
+Filename: "{app}\onlyaudio_by_audiofeel.exe"; Description: "Lancer Melophily"; Flags: nowait postinstall skipifsilent
 
 [Code]
 function GetUninstallString(): String;
@@ -87,7 +87,7 @@ begin
   begin
     if IsUpgrade() then
     begin
-      Msg := 'Une version précédente de OnlyAudio a été détectée.' + #13#10 +
+      Msg := 'Une version précédente de Melophily a été détectée.' + #13#10 +
              'Elle sera désinstallée avant de poursuivre.' + #13#10#13#10 +
              'Voulez-vous continuer ?';
       if MsgBox(Msg, mbConfirmation, MB_YESNO) = IDYES then

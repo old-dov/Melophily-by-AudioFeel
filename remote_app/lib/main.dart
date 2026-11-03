@@ -17,7 +17,7 @@ Future<void> main() async {
       builder: () => RemoteAudioHandler(),
       config: const AudioServiceConfig(
         androidNotificationChannelId: 'com.audiofeel.onlyaudio_remote.channel',
-        androidNotificationChannelName: 'OnlyAudio Remote',
+        androidNotificationChannelName: 'Melophily Remote',
         androidNotificationOngoing: false,
         androidShowNotificationBadge: false,
         androidNotificationIcon: 'mipmap/ic_launcher',
@@ -35,7 +35,7 @@ class OnlyAudioRemoteApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'OnlyAudio Remote',
+      title: 'Melophily Remote',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         brightness: Brightness.dark,
