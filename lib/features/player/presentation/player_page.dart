@@ -277,7 +277,7 @@ class _PlayerPageState extends State<PlayerPage> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text('OnlyAudio',
+              Text('Melophily',
                   style: TextStyle(
                       color: Colors.white,
                       fontSize: 15,
@@ -518,7 +518,7 @@ class _PlayerPageState extends State<PlayerPage> {
                               ),
                               SizedBox(
                                   height: constraints.maxHeight < 150 ? 8 : 14),
-                              Text('Bienvenue dans OnlyAudio',
+                              Text('Bienvenue dans Melophily',
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
                                       color: Colors.white,
@@ -659,7 +659,7 @@ class _PlayerPageState extends State<PlayerPage> {
                         height: compact ? 110 : 180, fit: BoxFit.contain),
                     SizedBox(height: compact ? 10 : 18),
                     Text(
-                      'OnlyAudio',
+                      'Melophily',
                       style: TextStyle(
                         fontSize: compact ? 19 : 24,
                         fontWeight: FontWeight.bold,

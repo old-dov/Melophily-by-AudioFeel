@@ -1,6 +1,6 @@
-# OnlyAudio — Build Linux
+# Melophily — Build Linux
 
-Guide complet pour compiler et distribuer OnlyAudio sur Linux.
+Guide complet pour compiler et distribuer Melophily sur Linux.
 
 ---
 
@@ -116,13 +116,13 @@ Package: onlyaudio
 Version: 1.0.0
 Architecture: amd64
 Maintainer: AudioFeel
-Description: OnlyAudio by AudioFeel — lecteur audio desktop
+Description: Melophily by AudioFeel — lecteur audio desktop
 Depends: libgtk-3-0, libmpv1
 EOF
 
 cat > onlyaudio_1.0.0_amd64/usr/share/applications/onlyaudio.desktop << EOF
 [Desktop Entry]
-Name=OnlyAudio
+Name=Melophily
 Exec=/usr/local/bin/onlyaudio/onlyaudio_by_audiofeel
 Type=Application
 Categories=Audio;Music;
@@ -148,7 +148,7 @@ Contrairement à macOS, Linux n'a pas de sandbox applicatif par défaut. L'app p
 
 ### Fenêtre
 
-Gérée par **window_manager** + **GTK3**. Taille minimale 700×480, titre « OnlyAudio by AudioFeel ».
+Gérée par **window_manager** + **GTK3**. Taille minimale 700×480, titre « Melophily by AudioFeel ».
 
 ---
 

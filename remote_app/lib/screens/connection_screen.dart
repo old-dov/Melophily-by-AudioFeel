@@ -53,7 +53,7 @@ class _ConnectionScreenState extends State<ConnectionScreen> {
         _foundServers = results;
         _scanning = false;
         if (results.isEmpty) {
-          _error = 'Aucun serveur OnlyAudio trouvé sur le réseau';
+          _error = 'Aucun serveur Melophily trouvé sur le réseau';
         }
       });
     } catch (e) {
@@ -127,7 +127,7 @@ class _ConnectionScreenState extends State<ConnectionScreen> {
               ),
               const SizedBox(height: 16),
               const Text(
-                'OnlyAudio Remote',
+                'Melophily Remote',
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 28,
@@ -256,7 +256,7 @@ class _ConnectionScreenState extends State<ConnectionScreen> {
                           title: Text(url,
                               style:
                                   const TextStyle(fontWeight: FontWeight.w600)),
-                          subtitle: const Text('OnlyAudio Desktop'),
+                          subtitle: const Text('Melophily Desktop'),
                           trailing: const Icon(Icons.arrow_forward_ios_rounded,
                               size: 16),
                           onTap: () => _connect(url),

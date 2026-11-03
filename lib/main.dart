@@ -25,14 +25,14 @@ Future<bool> _acquireSingleInstanceGuard() async {
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   if (!await _acquireSingleInstanceGuard()) {
-    debugPrint('OnlyAudio is already running. Exiting duplicate instance.');
+    debugPrint('Melophily is already running. Exiting duplicate instance.');
     return;
   }
   MediaKit.ensureInitialized();
   await windowManager.ensureInitialized();
   await windowManager.waitUntilReadyToShow(
     const WindowOptions(
-      title: 'OnlyAudio by AudioFeel',
+      title: 'Melophily by AudioFeel',
       minimumSize: Size(700, 480),
     ),
     () async {

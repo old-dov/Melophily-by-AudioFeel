@@ -1,4 +1,7 @@
-# 🎵 OnlyAudio by AudioFeel
+# 🎵 Melophily by AudioFeel
+
+> **OnlyAudio devient Melophily.** Le projet s'appelait OnlyAudio, un nom trop proche d'ONLYOFFICE, la suite bureautique bien connue, ce qui prêtait à confusion. Melophily vient du grec *mélos* (le chant, la musique) et *-philie* (l'amour de) : l'amour de la musique, vu depuis l'écoute.
+> Seul le nom change : même code, mêmes fonctions, même licence. Pour l'instant, les fichiers à télécharger (`OnlyAudio_Setup.exe`, `OnlyAudio_Remote.apk`…), l'adresse du dépôt et l'identifiant Android de la télécommande gardent l'ancien nom ; ils seront renommés dans une prochaine version. Les télécommandes déjà installées continuent de fonctionner.
 
 Lecteur audio desktop Windows & macOS avec télécommande Android.
 
@@ -40,7 +43,7 @@ Lecteur audio desktop Windows & macOS avec télécommande Android.
 ### Desktop Windows
 1. Téléchargez `OnlyAudio_Setup.exe` depuis la [page Releases](../../releases/latest)
 2. Lancez l'installateur
-3. OnlyAudio est prêt !
+3. Melophily est prêt !
 
 > La mise à jour détecte et désinstalle automatiquement la version précédente.
 
@@ -61,7 +64,7 @@ Lecteur audio desktop Windows & macOS avec télécommande Android.
 ### Télécommande Android
 1. Téléchargez `OnlyAudio_Remote.apk` depuis la [page Releases](../../releases/latest)
 2. Installez l'APK sur votre téléphone
-3. Lancez OnlyAudio sur le PC
+3. Lancez Melophily sur le PC
 4. Ouvrez la télécommande → scan automatique ou saisie de l'IP du PC
 
 > **Important** : Le téléphone et le PC doivent être sur le même réseau Wi-Fi.
@@ -72,7 +75,7 @@ Lecteur audio desktop Windows & macOS avec télécommande Android.
 
 ```
 ┌──────────────────────────────┐     HTTP (port 5000)     ┌──────────────────┐
-│     OnlyAudio Desktop        │ ◄──────────────────────► │  OnlyAudio       │
+│     Melophily Desktop        │ ◄──────────────────────► │  Melophily       │
 │  (Windows / macOS / Linux)   │     réseau local Wi-Fi   │  Remote (Android) │
 └──────────────────────────────┘                          └──────────────────┘
 ```

@@ -1,4 +1,4 @@
-# OnlyAudio by AudioFeel (Flutter)
+# Melophily by AudioFeel (Flutter)
 
 Windows-first Flutter rewrite of the original `onlyaudio.py`.
 
