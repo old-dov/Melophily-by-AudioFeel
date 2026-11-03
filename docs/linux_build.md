@@ -46,7 +46,7 @@ flutter doctor
 ## Cloner et configurer le projet
 
 ```bash
-git clone https://github.com/old-dov/OnlyAudio-by-AudioFeel.git
+git clone https://github.com/old-dov/Melophily-by-AudioFeel.git
 cd OnlyAudio-by-AudioFeel
 
 flutter pub get
@@ -99,7 +99,7 @@ mkdir -p OnlyAudio.AppDir/usr/bin
 cp -r build/linux/x64/release/bundle/* OnlyAudio.AppDir/usr/bin/
 
 # Créer l'AppImage
-./appimagetool OnlyAudio.AppDir OnlyAudio-x86_64.AppImage
+./appimagetool OnlyAudio.AppDir Melophily-x86_64.AppImage
 ```
 
 ### .deb (Debian / Ubuntu)

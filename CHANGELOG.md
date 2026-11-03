@@ -5,7 +5,8 @@
 ### Changement de nom
 - **OnlyAudio devient Melophily** (« l'amour de la musique »). L'ancien nom était trop proche d'ONLYOFFICE, la suite bureautique.
 - Renommage de ce que l'on voit : titres de fenêtre, textes de l'interface, raccourcis et textes de l'installateur, propriétés des exécutables Windows, nom de l'application Android (« Melophily Remote »), documentation.
-- Inchangés pour l'instant : noms des fichiers téléchargeables, adresse du dépôt, identifiants techniques (paquets, identifiant Android) et nom de reconnaissance entre le bureau et la télécommande, afin que les installations existantes continuent de se mettre à jour et de se retrouver. Ils seront traités dans une prochaine version.
+- Fichiers téléchargeables renommés (`Melophily_Setup.exe`, `Melophily_Remote.apk`, `Melophily-macOS.zip`, `Melophily-Linux-x86_64-…`) et dépôt renommé `Melophily-by-AudioFeel` (l'ancienne adresse redirige automatiquement).
+- Inchangés volontairement : identifiants techniques (paquets, identifiant Android, identifiant de l'installateur) et nom de reconnaissance entre le bureau et la télécommande, afin que les installations existantes continuent de se mettre à jour et de se retrouver.
 - La télécommande reconnaît désormais un bureau qui s'annonce sous l'un ou l'autre nom.
 
 ## [2.5.0-beta.1] - 2026-10-05
