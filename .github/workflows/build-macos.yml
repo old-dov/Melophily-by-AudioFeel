@@ -40,7 +40,7 @@ jobs:
       - name: Package .app into zip
         run: |
           cd build/macos/Build/Products/Release
-          ditto -c -k --sequesterRsrc --keepParent OnlyAudio.app OnlyAudio-macOS.zip
+          ditto -c -k --sequesterRsrc --keepParent OnlyAudio.app Melophily-macOS.zip
 
       - name: Determine version
         id: version
@@ -58,11 +58,11 @@ jobs:
           name: OnlyAudio ${{ steps.version.outputs.tag }}
           draft: false
           prerelease: ${{ contains(steps.version.outputs.tag, '-') }}
-          files: build/macos/Build/Products/Release/OnlyAudio-macOS.zip
+          files: build/macos/Build/Products/Release/Melophily-macOS.zip
           body: |
             ## Installation macOS
 
-            1. Télécharge **OnlyAudio-macOS.zip**
+            1. Télécharge **Melophily-macOS.zip**
             2. Double-clique pour extraire
             3. Glisse **OnlyAudio.app** dans ton dossier Applications
             4. Au premier lancement : clic droit → Ouvrir (pour contourner Gatekeeper)

@@ -60,13 +60,13 @@ jobs:
           mkdir -p dist/OnlyAudio
           cp -a build/linux/x64/release/bundle/. dist/OnlyAudio/
           cp docs/linux_build.md dist/OnlyAudio/README-Linux.md
-          tar -C dist -czf "OnlyAudio-Linux-x86_64-${{ steps.version.outputs.tag }}.tar.gz" OnlyAudio
+          tar -C dist -czf "Melophily-Linux-x86_64-${{ steps.version.outputs.tag }}.tar.gz" OnlyAudio
 
       - name: Upload workflow artifact
         uses: actions/upload-artifact@v4
         with:
-          name: OnlyAudio-Linux-x86_64-${{ steps.version.outputs.tag }}
-          path: OnlyAudio-Linux-x86_64-${{ steps.version.outputs.tag }}.tar.gz
+          name: Melophily-Linux-x86_64-${{ steps.version.outputs.tag }}
+          path: Melophily-Linux-x86_64-${{ steps.version.outputs.tag }}.tar.gz
 
       - name: Add artifact to GitHub Release
         uses: softprops/action-gh-release@v2
@@ -75,6 +75,6 @@ jobs:
           name: OnlyAudio ${{ steps.version.outputs.tag }}
           draft: false
           prerelease: ${{ contains(steps.version.outputs.tag, '-') }}
-          files: OnlyAudio-Linux-x86_64-${{ steps.version.outputs.tag }}.tar.gz
+          files: Melophily-Linux-x86_64-${{ steps.version.outputs.tag }}.tar.gz
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

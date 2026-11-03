@@ -24,12 +24,12 @@ Contrôlez OnlyAudio depuis votre téléphone ! Cette version majeure ajoute une
 
 | Fichier | Plateforme | Description |
 |---------|-----------|-------------|
-| `OnlyAudio_Setup.exe` | Windows 10/11 | Installateur desktop (inclut mise à jour auto) |
-| `OnlyAudio_Remote.apk` | Android 5.0+ | Télécommande mobile |
+| `Melophily_Setup.exe` | Windows 10/11 | Installateur desktop (inclut mise à jour auto) |
+| `Melophily_Remote.apk` | Android 5.0+ | Télécommande mobile |
 
 ### Installation
-1. **Desktop** : Lancez `OnlyAudio_Setup.exe` et suivez les étapes
-2. **Android** : Installez `OnlyAudio_Remote.apk` sur votre téléphone
+1. **Desktop** : Lancez `Melophily_Setup.exe` et suivez les étapes
+2. **Android** : Installez `Melophily_Remote.apk` sur votre téléphone
 3. Assurez-vous que les deux appareils sont sur le **même réseau Wi-Fi**
 4. Lancez OnlyAudio sur le PC, puis ouvrez la télécommande
 
