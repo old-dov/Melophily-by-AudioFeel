@@ -19,6 +19,8 @@ class RemoteApiServer {
     final router = Router()
       ..get('/discover', (Request request) {
         return Response.ok(
+          // Wire name, not the display name: remotes already installed look for
+          // exactly this value, so it stays 'OnlyAudio' after the Melophily rename.
           jsonEncode({'app': 'OnlyAudio'}),
           headers: {'content-type': 'application/json'},
         );

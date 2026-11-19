@@ -1,7 +1,7 @@
 name: onlyaudio_by_audiofeel
-description: OnlyAudio by AudioFeel desktop player
+description: Melophily by AudioFeel desktop player
 publish_to: "none"
-version: 2.5.0-beta.2+1
+version: 2.5.0+1
 
 environment:
   sdk: ">=3.3.0 <4.0.0"
@@ -28,9 +28,24 @@ dev_dependencies:
   flutter_lints: ^5.0.0
   flutter_test:
     sdk: flutter
+  msix: ^3.16.7
 
 flutter:
   uses-material-design: true
   assets:
     - logo.JPG
     - assets/bg_default.png
+
+# Microsoft Store (Partner Center product "Melophily", reserved 2026-11-17). The identity values
+# below are the ones the Store assigned; they are not ours to change. `store: true` builds an
+# unsigned package for upload: the Store signs it, so no code-signing certificate is needed.
+msix_config:
+  display_name: Melophily
+  publisher_display_name: Block Rocking Bytes
+  identity_name: BlockRockingBytes.Melophily
+  publisher: CN=D4F08B06-6E8B-41B0-A62A-9E76FDBBA164
+  msix_version: 2.5.0.0
+  logo_path: screenshots\onlyaudio_cover_600x600.png
+  capabilities: privateNetworkClientServer
+  languages: fr-fr, en-us
+  store: true

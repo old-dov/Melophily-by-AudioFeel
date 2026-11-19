@@ -19,6 +19,6 @@ void main() {
     );
     await tester.pump();
     final app = tester.widget<MaterialApp>(find.byType(MaterialApp));
-    expect(app.title, 'OnlyAudio by AudioFeel');
+    expect(app.title, 'Melophily by AudioFeel');
   });
 }

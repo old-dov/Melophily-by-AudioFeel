@@ -2,7 +2,7 @@
 
 ## Functional parity
 
-- [ ] Launch app and verify title "OnlyAudio by AudioFeel"
+- [ ] Launch app and verify title "Melophily by AudioFeel"
 - [ ] Add files and folder, confirm dedup works
 - [ ] Play/pause/next/prev behavior
 - [ ] Seek and volume updates

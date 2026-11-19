@@ -1,6 +1,6 @@
-# OnlyAudio — Build macOS
+# Melophily — Build macOS
 
-Guide complet pour compiler et distribuer OnlyAudio sur macOS.
+Guide complet pour compiler et distribuer Melophily sur macOS.
 
 ---
 
@@ -22,7 +22,7 @@ Guide complet pour compiler et distribuer OnlyAudio sur macOS.
 ## Cloner et configurer le projet
 
 ```bash
-git clone https://github.com/old-dov/OnlyAudio-by-AudioFeel.git
+git clone https://github.com/old-dov/Melophily-by-AudioFeel.git
 cd OnlyAudio-by-AudioFeel
 
 # Télécharger les dépendances Dart
@@ -59,7 +59,7 @@ Pour créer une archive distribuable (`.dmg` ou `.zip`) :
 ```bash
 # Créer un .zip directement utilisable
 cd build/macos/Build/Products/Release/
-zip -r OnlyAudio-mac.zip OnlyAudio.app
+zip -r Melophily-macOS.zip OnlyAudio.app
 ```
 
 ---
@@ -79,7 +79,7 @@ codesign --deep --force --verify --verbose \
 ### 2. Créer le DMG
 
 ```bash
-hdiutil create -volname "OnlyAudio" \
+hdiutil create -volname "Melophily" \
   -srcfolder build/macos/Build/Products/Release/OnlyAudio.app \
   -ov -format UDZO OnlyAudio.dmg
 ```
@@ -120,7 +120,7 @@ L'audio est géré par **media_kit** (libmpv) via `media_kit_libs_macos_audio`. 
 
 ### Fenêtre
 
-Gérée par **window_manager** — taille minimale 700×480, titre « OnlyAudio by AudioFeel ».
+Gérée par **window_manager** — taille minimale 700×480, titre « Melophily by AudioFeel ».
 
 ---
 

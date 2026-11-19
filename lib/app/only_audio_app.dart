@@ -10,7 +10,7 @@ class OnlyAudioApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'OnlyAudio by AudioFeel',
+      title: 'Melophily by AudioFeel',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         brightness: Brightness.dark,

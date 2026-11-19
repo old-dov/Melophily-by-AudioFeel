@@ -1,4 +1,4 @@
-# OnlyAudio — Guide d'utilisation macOS
+# Melophily — Guide d'utilisation macOS
 
 > Guide destiné aux utilisateurs macOS, sans aucune notion technique requise.
 
@@ -8,12 +8,12 @@
 
 ### Télécharger l'application
 
-1. Va sur la page **[Releases du projet](https://github.com/old-dov/OnlyAudio-by-AudioFeel/releases/latest)**
-2. Sous la section **Assets**, clique sur **OnlyAudio-macOS.zip** pour le télécharger
+1. Va sur la page **[Releases du projet](https://github.com/old-dov/Melophily-by-AudioFeel/releases/latest)**
+2. Sous la section **Assets**, clique sur **Melophily-macOS.zip** pour le télécharger
 
 ### Installer l'application
 
-1. Double-clique sur le fichier `OnlyAudio-macOS.zip` pour l'extraire — tu obtiens `OnlyAudio.app`
+1. Double-clique sur le fichier `Melophily-macOS.zip` pour l'extraire — tu obtiens `OnlyAudio.app`
 2. Glisse `OnlyAudio.app` dans ton dossier **Applications**
 
 ### Premier lancement (contourner l'avertissement macOS)
@@ -35,7 +35,7 @@ Comme l'application n'est pas signée par Apple, macOS va bloquer le premier lan
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
-│  Logo  OnlyAudio · Your sound. Your way.       12:34:56  ⛶  X  │  ← Barre du haut
+│  Logo  Melophily · Your sound. Your way.       12:34:56  ⛶  X  │  ← Barre du haut
 ├──────────────────────────────────────────────────────────────────┤
 │                                                                  │
 │                      Pochette de l'album                         │  ← Zone centrale
@@ -110,13 +110,13 @@ Clique à nouveau pour revenir en mode fenêtré.
 
 ## 7. Télécommande Android (optionnel)
 
-OnlyAudio peut être contrôlé depuis ton téléphone Android via l'app **OnlyAudio Remote**.
+Melophily peut être contrôlé depuis ton téléphone Android via l'app **Melophily Remote**.
 
 **Prérequis :** le téléphone et le Mac doivent être connectés au **même réseau Wi-Fi**.
 
-1. Télécharge **OnlyAudio_Remote.apk** depuis la page Releases
+1. Télécharge **Melophily_Remote.apk** depuis la page Releases
 2. Installe-le sur ton téléphone (autorise les sources inconnues si demandé)
-3. Lance OnlyAudio sur le Mac
+3. Lance Melophily sur le Mac
 4. Ouvre la télécommande → elle détecte automatiquement le Mac
 
 Depuis le téléphone tu peux : lecture/pause, piste suivante/précédente, volume, shuffle, repeat, voir la pochette et naviguer dans la playlist.
@@ -137,4 +137,4 @@ Clique sur le **X** en haut à droite de l'application.
 
 ---
 
-*OnlyAudio by AudioFeel — © 2026*
+*Melophily by AudioFeel — © 2026*

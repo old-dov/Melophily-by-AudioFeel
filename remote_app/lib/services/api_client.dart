@@ -171,7 +171,9 @@ class ApiClient {
           .timeout(_timeout);
       if (response.statusCode == 200) {
         final data = jsonDecode(response.body) as Map<String, dynamic>;
-        return data['app'] == 'OnlyAudio';
+        // Desktop builds still announce themselves as 'OnlyAudio' (the wire name
+        // is kept so older remotes keep finding them); accept both.
+        return data['app'] == 'OnlyAudio' || data['app'] == 'Melophily';
       }
     } catch (_) {
       // not reachable

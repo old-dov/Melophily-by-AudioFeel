@@ -5,7 +5,7 @@ import 'package:flutter/foundation.dart';
 
 import '../logic/player_controller.dart';
 
-/// Publishes OnlyAudio to the operating system media session.
+/// Publishes Melophily to the operating system media session.
 ///
 /// Bluetooth remotes and headset buttons are translated by the operating
 /// system into the callbacks implemented by [_OnlyAudioMediaHandler].
@@ -26,7 +26,7 @@ class SystemMediaService {
       },
       config: const AudioServiceConfig(
         androidNotificationChannelId: 'com.audiofeel.onlyaudio.media',
-        androidNotificationChannelName: 'OnlyAudio',
+        androidNotificationChannelName: 'Melophily',
       ),
     );
 

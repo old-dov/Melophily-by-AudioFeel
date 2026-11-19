@@ -1,4 +1,7 @@
-# 🎵 OnlyAudio by AudioFeel
+# 🎵 Melophily by AudioFeel
+
+> **OnlyAudio devient Melophily.** Le projet s'appelait OnlyAudio, un nom trop proche d'ONLYOFFICE, la suite bureautique bien connue, ce qui prêtait à confusion. Melophily vient du grec *mélos* (le chant, la musique) et *-philie* (l'amour de) : l'amour de la musique, vu depuis l'écoute.
+> Seul le nom change : même code, mêmes fonctions, même licence. Les fichiers à télécharger (`Melophily_Setup.exe`, `Melophily_Remote.apk`…) et l'adresse du dépôt portent désormais le nouveau nom ; l'ancienne adresse redirige automatiquement. Les identifiants techniques (paquets, identifiant Android de la télécommande) restent inchangés pour que les installations existantes continuent de se mettre à jour et de se retrouver.
 
 Lecteur audio desktop Windows & macOS avec télécommande Android.
 
@@ -38,30 +41,30 @@ Lecteur audio desktop Windows & macOS avec télécommande Android.
 ## Installation
 
 ### Desktop Windows
-1. Téléchargez `OnlyAudio_Setup.exe` depuis la [page Releases](../../releases/latest)
+1. Téléchargez `Melophily_Setup.exe` depuis la [page Releases](../../releases/latest)
 2. Lancez l'installateur
-3. OnlyAudio est prêt !
+3. Melophily est prêt !
 
 > La mise à jour détecte et désinstalle automatiquement la version précédente.
 
 ### Desktop macOS
-1. Téléchargez `OnlyAudio-mac.zip` depuis la [page Releases](../../releases/latest)
+1. Téléchargez `Melophily-macOS.zip` depuis la [page Releases](../../releases/latest)
 2. Décompressez et glissez `OnlyAudio.app` dans votre dossier Applications
 3. Au premier lancement : clic droit → Ouvrir (si Gatekeeper le bloque)
 
 > Pour compiler depuis les sources, voir [docs/macos_build.md](docs/macos_build.md).
 
 ### Desktop Linux
-1. Téléchargez `OnlyAudio-x86_64.AppImage` depuis la [page Releases](../../releases/latest)
-2. Rendez-le exécutable : `chmod +x OnlyAudio-x86_64.AppImage`
-3. Lancez : `./OnlyAudio-x86_64.AppImage`
+1. Téléchargez `Melophily-x86_64.AppImage` depuis la [page Releases](../../releases/latest)
+2. Rendez-le exécutable : `chmod +x Melophily-x86_64.AppImage`
+3. Lancez : `./Melophily-x86_64.AppImage`
 
 > Pour compiler depuis les sources, voir [docs/linux_build.md](docs/linux_build.md).
 
 ### Télécommande Android
-1. Téléchargez `OnlyAudio_Remote.apk` depuis la [page Releases](../../releases/latest)
+1. Téléchargez `Melophily_Remote.apk` depuis la [page Releases](../../releases/latest)
 2. Installez l'APK sur votre téléphone
-3. Lancez OnlyAudio sur le PC
+3. Lancez Melophily sur le PC
 4. Ouvrez la télécommande → scan automatique ou saisie de l'IP du PC
 
 > **Important** : Le téléphone et le PC doivent être sur le même réseau Wi-Fi.
@@ -72,7 +75,7 @@ Lecteur audio desktop Windows & macOS avec télécommande Android.
 
 ```
 ┌──────────────────────────────┐     HTTP (port 5000)     ┌──────────────────┐
-│     OnlyAudio Desktop        │ ◄──────────────────────► │  OnlyAudio       │
+│     Melophily Desktop        │ ◄──────────────────────► │  Melophily       │
 │  (Windows / macOS / Linux)   │     réseau local Wi-Fi   │  Remote (Android) │
 └──────────────────────────────┘                          └──────────────────┘
 ```
@@ -129,7 +132,7 @@ Ce script :
 - lance le build Windows release
 - compile l'installateur
 - met a jour `dist/OnlyAudio/` avec la version portable
-- copie `OnlyAudio_Setup.exe` dans `dist/`
+- copie `Melophily_Setup.exe` dans `dist/`
 
 Le script accepte un compilateur Inno Setup explicite et refuse les builds preview par defaut.
 

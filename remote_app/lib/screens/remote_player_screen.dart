@@ -109,7 +109,7 @@ class _RemotePlayerScreenState extends State<RemotePlayerScreen> {
       });
       _audioHandler?.setPlaying(status.isPlaying);
       _audioHandler?.updateNotification(
-        title: status.title.isNotEmpty ? status.title : 'OnlyAudio',
+        title: status.title.isNotEmpty ? status.title : 'Melophily',
         artist: status.artist.isNotEmpty ? status.artist : 'Artiste Inconnu',
         album: status.album.isNotEmpty ? status.album : 'Album Inconnu',
         position: Duration(milliseconds: max(0, status.posMs)),
@@ -245,7 +245,7 @@ class _RemotePlayerScreenState extends State<RemotePlayerScreen> {
           ),
           const SizedBox(width: 8),
           const Text(
-            'OnlyAudio',
+            'Melophily',
             style: TextStyle(
               color: Colors.white,
               fontSize: 15,

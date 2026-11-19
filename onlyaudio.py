@@ -184,6 +184,7 @@ def route_playlist():
 
 @app_flask.route('/discover')
 def route_discover():
+    # Wire name kept for already-installed remotes (display name is Melophily).
     return jsonify({'app': 'OnlyAudio', 'version': '1.0'})
 
 def run_server():
@@ -330,7 +331,7 @@ class OnlyAudioPlayer(App):
         
         pygame.mixer.init()
         
-        self.title = "OnlyAudio"
+        self.title = "Melophily"
         Window.clearcolor = (0.05, 0.05, 0.05, 1)
 
         self.root = BoxLayout(orientation='vertical')
@@ -340,7 +341,7 @@ class OnlyAudioPlayer(App):
         with header.canvas.before:
             Color(0.08, 0.08, 0.08, 1)
             Rectangle(pos=header.pos, size=header.size)
-        lbl_app_name = Label(text="OnlyAudio", font_size='20sp', bold=True, color=(0.3, 0.7, 1, 1), size_hint_x=None, width=150)
+        lbl_app_name = Label(text="Melophily", font_size='20sp', bold=True, color=(0.3, 0.7, 1, 1), size_hint_x=None, width=150)
         header.add_widget(lbl_app_name)
         header.add_widget(Label())
         right_header = BoxLayout(size_hint_x=None, width=450, spacing=15)

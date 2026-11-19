@@ -12,6 +12,6 @@ import 'package:onlyaudio_remote/main.dart';
 void main() {
   testWidgets('App starts without crashing', (WidgetTester tester) async {
     await tester.pumpWidget(const OnlyAudioRemoteApp());
-    expect(find.text('OnlyAudio Remote'), findsOneWidget);
+    expect(find.text('Melophily Remote'), findsOneWidget);
   });
 }
