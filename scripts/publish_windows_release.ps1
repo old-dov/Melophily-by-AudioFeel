@@ -15,8 +15,8 @@ $releaseDir = Join-Path $repoRoot 'build\windows\x64\runner\Release'
 $defaultOutputDir = Join-Path $repoRoot 'dist'
 $publishDir = if ($OutputDir) { $OutputDir } else { $defaultOutputDir }
 $portableDir = Join-Path $publishDir 'OnlyAudio'
-$installerSource = Join-Path $repoRoot 'installer_output\OnlyAudio_Setup.exe'
-$installerTarget = Join-Path $publishDir 'OnlyAudio_Setup.exe'
+$installerSource = Join-Path $repoRoot 'installer_output\Melophily_Setup.exe'
+$installerTarget = Join-Path $publishDir 'Melophily_Setup.exe'
 
 function Assert-NoSensitiveRepoData {
     param([string]$RepositoryRoot)

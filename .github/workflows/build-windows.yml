@@ -75,7 +75,7 @@ jobs:
       - name: Rename installer with version
         shell: pwsh
         run: |
-          Copy-Item "installer_output\OnlyAudio_Setup.exe" "installer_output\OnlyAudio_Setup_${{ steps.version.outputs.tag }}.exe"
+          Copy-Item "installer_output\Melophily_Setup.exe" "installer_output\Melophily_Setup_${{ steps.version.outputs.tag }}.exe"
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
@@ -84,11 +84,11 @@ jobs:
           name: OnlyAudio ${{ steps.version.outputs.tag }}
           draft: false
           prerelease: ${{ contains(steps.version.outputs.tag, '-') }}
-          files: installer_output\OnlyAudio_Setup_${{ steps.version.outputs.tag }}.exe
+          files: installer_output\Melophily_Setup_${{ steps.version.outputs.tag }}.exe
           body: |
             ## Installation Windows
 
-            1. Télécharge **OnlyAudio_Setup_${{ steps.version.outputs.tag }}.exe**
+            1. Télécharge **Melophily_Setup_${{ steps.version.outputs.tag }}.exe**
             2. Lance l'installeur et suis les étapes
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

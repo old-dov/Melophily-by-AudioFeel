@@ -22,7 +22,7 @@ Guide complet pour compiler et distribuer Melophily sur macOS.
 ## Cloner et configurer le projet
 
 ```bash
-git clone https://github.com/old-dov/OnlyAudio-by-AudioFeel.git
+git clone https://github.com/old-dov/Melophily-by-AudioFeel.git
 cd OnlyAudio-by-AudioFeel
 
 # Télécharger les dépendances Dart
@@ -59,7 +59,7 @@ Pour créer une archive distribuable (`.dmg` ou `.zip`) :
 ```bash
 # Créer un .zip directement utilisable
 cd build/macos/Build/Products/Release/
-zip -r OnlyAudio-mac.zip OnlyAudio.app
+zip -r Melophily-macOS.zip OnlyAudio.app
 ```
 
 ---

@@ -114,7 +114,7 @@ finally {
     Pop-Location
 }
 
-$installerOutput = Join-Path $repoRoot 'installer_output\OnlyAudio_Setup.exe'
+$installerOutput = Join-Path $repoRoot 'installer_output\Melophily_Setup.exe'
 if (Test-Path $installerOutput) {
     Write-Host "Installer created: $installerOutput"
 } else {
