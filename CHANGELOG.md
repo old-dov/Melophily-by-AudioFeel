@@ -1,6 +1,10 @@
 # Changelog
 
-## [Non publié]
+## [2.5.0] - 2026-11-19
+
+### Disponibilité
+- Melophily est disponible sur le Microsoft Store.
+- Le dossier d'installation par défaut devient `Melophily` ; les installations existantes gardent leur dossier.
 
 ### Changement de nom
 - **OnlyAudio devient Melophily** (« l'amour de la musique »). L'ancien nom était trop proche d'ONLYOFFICE, la suite bureautique.
