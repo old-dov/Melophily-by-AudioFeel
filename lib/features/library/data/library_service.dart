@@ -26,6 +26,11 @@ class LibraryService {
   Future<List<String>> pickFolderAndScan() async {
     final dirPath = await FilePicker.platform.getDirectoryPath();
     if (dirPath == null) return [];
+    return scanFolder(dirPath);
+  }
+
+  /// Everything playable under [dirPath], sorted. Also used for folders dropped on the window.
+  Future<List<String>> scanFolder(String dirPath) async {
     final dir = Directory(dirPath);
     if (!await dir.exists()) return [];
     // Asynchronous listing: a synchronous walk of a big tree on a slow disk froze the window.
@@ -40,5 +45,23 @@ class LibraryService {
     }
     files.sort();
     return files;
+  }
+
+  /// Turns dropped paths (files and/or folders) into playable file paths.
+  Future<List<String>> expandDropped(List<String> dropped) async {
+    final out = <String>[];
+    for (final path in dropped) {
+      try {
+        if (await FileSystemEntity.isDirectory(path)) {
+          out.addAll(await scanFolder(path));
+        } else if (supportedExtensions.any(path.toLowerCase().endsWith) &&
+            await File(path).exists()) {
+          out.add(path);
+        }
+      } on FileSystemException {
+        // unreadable: skip it
+      }
+    }
+    return out;
   }
 }

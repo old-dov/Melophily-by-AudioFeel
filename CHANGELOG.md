@@ -2,6 +2,9 @@
 
 ## [2.5.1] - 2026-11-24
 
+### Nouveautés
+- **Glisser-déposer** : on peut déposer des fichiers ou un dossier sur la fenêtre pour les ajouter, sans passer par le dialogue de choix de dossier de Windows (qui plante sur certaines sessions, par exemple Windows To Go).
+
 ### Corrections
 - **Le lecteur ne s'ouvrait plus, sans message** : l'application réserve un port local pour empêcher un second lancement, et Windows peut interdire ce port après un redémarrage (plages réservées par Hyper-V, WSL ou Docker). Elle se croyait alors déjà ouverte et quittait en laissant un processus invisible. Elle vérifie maintenant qui occupe le port et essaie d'autres ports.
 - **Le morceau « À suivre » ne change plus sans cesse** en lecture aléatoire : il est choisi une fois et reste affiché (lecteur et télécommande) jusqu'à ce que la lecture avance.

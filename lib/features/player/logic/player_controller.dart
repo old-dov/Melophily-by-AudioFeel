@@ -196,6 +196,13 @@ class PlayerController extends ChangeNotifier {
     await _addTrackPaths(paths);
   }
 
+  /// Files and folders dropped on the window: the way in when the system folder dialog fails.
+  Future<void> addDropped(List<String> dropped) async {
+    if (_isImporting) return;
+    final paths = await _libraryService.expandDropped(dropped);
+    await _addTrackPaths(paths);
+  }
+
   // Import progress, for the UI (a big folder takes a while: tags are read off the UI isolate).
   bool _isImporting = false;
   int _importDone = 0;
