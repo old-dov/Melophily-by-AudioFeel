@@ -3,6 +3,8 @@
 ## [2.5.1] - 2026-11-24
 
 ### Corrections
+- **Le lecteur ne s'ouvrait plus, sans message** : l'application réserve un port local pour empêcher un second lancement, et Windows peut interdire ce port après un redémarrage (plages réservées par Hyper-V, WSL ou Docker). Elle se croyait alors déjà ouverte et quittait en laissant un processus invisible. Elle vérifie maintenant qui occupe le port et essaie d'autres ports.
+- **Le morceau « À suivre » ne change plus sans cesse** en lecture aléatoire : il est choisi une fois et reste affiché (lecteur et télécommande) jusqu'à ce que la lecture avance.
 - **Plantage à l'ajout d'un gros dossier** (observé sur une session Windows To Go avec environ 2 800 morceaux) : la lecture des tags passait par un plugin natif qui bloquait la fenêtre puis pouvait faire planter l'application. Les tags sont maintenant lus en Dart pur, hors du fil de l'interface, par lots.
 - Le parcours du dossier est asynchrone et ignore les sous-dossiers illisibles au lieu d'échouer.
 - Pendant un import, les boutons d'ajout affichent la progression (`1240/2800`) et la liste se remplit au fur et à mesure.
