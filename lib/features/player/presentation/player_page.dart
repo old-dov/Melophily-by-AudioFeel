@@ -426,11 +426,16 @@ class _PlayerPageState extends State<PlayerPage> {
           child: Row(
             children: [
               Expanded(
-                  child: _darkBtn('+FICHIER', () => _controller.addFiles(),
+                  child: _darkBtn('+FICHIER',
+                      _controller.isImporting ? null : () => _controller.addFiles(),
                       fg: _kCyan)),
               const SizedBox(width: 4),
               Expanded(
-                  child: _darkBtn('+DOSSIER', () => _controller.addFolder(),
+                  child: _darkBtn(
+                      _controller.isImporting
+                          ? '${_controller.importDone}/${_controller.importTotal}'
+                          : '+DOSSIER',
+                      _controller.isImporting ? null : () => _controller.addFolder(),
                       fg: _kCyan)),
               const SizedBox(width: 4),
               Expanded(

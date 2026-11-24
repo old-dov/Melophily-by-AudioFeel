@@ -27,14 +27,18 @@ class LibraryService {
     final dirPath = await FilePicker.platform.getDirectoryPath();
     if (dirPath == null) return [];
     final dir = Directory(dirPath);
-    if (!dir.existsSync()) return [];
-    final files = dir
-        .listSync(recursive: true)
-        .whereType<File>()
-        .map((f) => f.path)
-        .where((path) => supportedExtensions.any(path.toLowerCase().endsWith))
-        .toList()
-      ..sort();
+    if (!await dir.exists()) return [];
+    // Asynchronous listing: a synchronous walk of a big tree on a slow disk froze the window.
+    // A sub-folder we cannot read (permissions, recycle bin...) is skipped, not fatal.
+    final files = <String>[];
+    await for (final entity in dir
+        .list(recursive: true, followLinks: false)
+        .handleError((_) {}, test: (e) => e is FileSystemException)) {
+      if (entity is! File) continue;
+      final lower = entity.path.toLowerCase();
+      if (supportedExtensions.any(lower.endsWith)) files.add(entity.path);
+    }
+    files.sort();
     return files;
   }
 }

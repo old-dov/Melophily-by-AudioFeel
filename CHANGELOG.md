@@ -1,5 +1,15 @@
 # Changelog
 
+## [2.5.1] - 2026-11-24
+
+### Corrections
+- **Plantage à l'ajout d'un gros dossier** (observé sur une session Windows To Go avec environ 2 800 morceaux) : la lecture des tags passait par un plugin natif qui bloquait la fenêtre puis pouvait faire planter l'application. Les tags sont maintenant lus en Dart pur, hors du fil de l'interface, par lots.
+- Le parcours du dossier est asynchrone et ignore les sous-dossiers illisibles au lieu d'échouer.
+- Pendant un import, les boutons d'ajout affichent la progression (`1240/2800`) et la liste se remplit au fur et à mesure.
+
+### Remarque
+- Les fichiers `.aac` bruts (sans conteneur) n'ont pas de tags lisibles : ils sont affichés avec leur nom de fichier.
+
 ## [2.5.0] - 2026-11-19
 
 ### Disponibilité

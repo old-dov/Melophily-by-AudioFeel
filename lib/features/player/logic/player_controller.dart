@@ -191,13 +191,37 @@ class PlayerController extends ChangeNotifier {
     await _addTrackPaths(paths);
   }
 
+  // Import progress, for the UI (a big folder takes a while: tags are read off the UI isolate).
+  bool _isImporting = false;
+  int _importDone = 0;
+  int _importTotal = 0;
+  bool get isImporting => _isImporting;
+  int get importDone => _importDone;
+  int get importTotal => _importTotal;
+
   Future<void> _addTrackPaths(List<String> paths) async {
-    if (paths.isEmpty) return;
+    if (paths.isEmpty || _isImporting) return;
     final known = _playlist.map((e) => e.path).toSet();
+    final fresh = <String>[];
     for (final path in paths) {
-      if (known.contains(path)) continue;
-      known.add(path);
-      _playlist.add(await _metadataService.fromPath(path));
+      if (known.add(path)) fresh.add(path);
+    }
+    if (fresh.isEmpty) return;
+    _isImporting = true;
+    _importDone = 0;
+    _importTotal = fresh.length;
+    notifyListeners();
+    try {
+      await _metadataService.fromPaths(
+        fresh,
+        onBatch: (batch, done, total) {
+          _playlist.addAll(batch);
+          _importDone = done;
+          notifyListeners();
+        },
+      );
+    } finally {
+      _isImporting = false;
     }
     await _persist();
     notifyListeners();
