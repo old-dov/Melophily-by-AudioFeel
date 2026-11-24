@@ -115,4 +115,22 @@ void main() {
     }
     expect(tracks.map((Track t) => t.path).toSet().length, count);
   }, timeout: const Timeout(Duration(minutes: 3)));
+
+  test('a cancelled import stops reading: no further batch is delivered', () async {
+    final paths = <String>[
+      for (var i = 0; i < 400; i++) write('c$i.mp3', _mp3(title: 'C $i')),
+    ];
+    var cancelled = false;
+    var batches = 0;
+    final tracks = await service.fromPaths(
+      paths,
+      isCancelled: () => cancelled,
+      onBatch: (batch, done, total) {
+        batches++;
+        if (batches == 2) cancelled = true;
+      },
+    );
+    expect(batches, 2);
+    expect(tracks.length, 2 * MetadataService.chunkSize);
+  });
 }

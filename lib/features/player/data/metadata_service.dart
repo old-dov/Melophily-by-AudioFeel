@@ -35,12 +35,16 @@ class MetadataService {
   /// Reads [paths] in order, [chunkSize] at a time, and returns one [Track] per path. A file whose
   /// tags cannot be read still yields a track (titled after the file) instead of failing the lot.
   /// [onBatch] receives each finished chunk, so a caller can show the playlist filling up.
+  /// [isCancelled] is asked before each chunk; once it says yes the rest is not read and the
+  /// tracks read so far are returned.
   Future<List<Track>> fromPaths(
     List<String> paths, {
     void Function(List<Track> batch, int done, int total)? onBatch,
+    bool Function()? isCancelled,
   }) async {
     final all = <Track>[];
     for (var i = 0; i < paths.length; i += chunkSize) {
+      if (isCancelled?.call() ?? false) break;
       final chunk = paths.sublist(i, math.min(i + chunkSize, paths.length));
       List<Track> tracks;
       try {

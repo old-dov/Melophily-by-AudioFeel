@@ -205,6 +205,7 @@ class PlayerController extends ChangeNotifier {
 
   // Import progress, for the UI (a big folder takes a while: tags are read off the UI isolate).
   bool _isImporting = false;
+  int _importGeneration = 0; // clearPlaylist bumps it: the import in flight stops and adds nothing
   int _importDone = 0;
   int _importTotal = 0;
   bool get isImporting => _isImporting;
@@ -219,6 +220,8 @@ class PlayerController extends ChangeNotifier {
       if (known.add(path)) fresh.add(path);
     }
     if (fresh.isEmpty) return;
+    final generation = ++_importGeneration;
+    bool cancelled() => generation != _importGeneration;
     _isImporting = true;
     _importDone = 0;
     _importTotal = fresh.length;
@@ -226,7 +229,9 @@ class PlayerController extends ChangeNotifier {
     try {
       await _metadataService.fromPaths(
         fresh,
+        isCancelled: cancelled,
         onBatch: (batch, done, total) {
+          if (cancelled()) return;
           _playlist.addAll(batch);
           _importDone = done;
           notifyListeners();
@@ -234,6 +239,10 @@ class PlayerController extends ChangeNotifier {
       );
     } finally {
       _isImporting = false;
+    }
+    if (cancelled()) {
+      notifyListeners();
+      return;
     }
     await _persist();
     notifyListeners();
@@ -365,6 +374,7 @@ class PlayerController extends ChangeNotifier {
   }
 
   Future<void> clearPlaylist() async {
+    _importGeneration++; // an import still reading tags must not refill the list
     _playlist.clear();
     _nextPlanner.invalidate();
     _state.currentIndex = 0;
