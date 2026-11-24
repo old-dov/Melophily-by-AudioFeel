@@ -1,7 +1,7 @@
 name: onlyaudio_by_audiofeel
 description: Melophily by AudioFeel desktop player
 publish_to: "none"
-version: 2.5.0+1
+version: 2.5.1+1
 
 environment:
   sdk: ">=3.3.0 <4.0.0"
@@ -10,7 +10,6 @@ dependencies:
   flutter:
     sdk: flutter
   file_picker: ^8.1.2
-  flutter_media_metadata: ^1.0.0+1
   path: ^1.9.0
   shared_preferences: ^2.3.2
   shelf: ^1.4.2
@@ -23,6 +22,8 @@ dependencies:
   audio_service: ^0.18.19
   audio_service_win: ^0.0.3
   audio_service_mpris: ^0.2.1
+  audio_metadata_reader: ^1.8.1
+  desktop_drop: ^0.8.4
 
 dev_dependencies:
   flutter_lints: ^5.0.0
@@ -44,7 +45,7 @@ msix_config:
   publisher_display_name: Block Rocking Bytes
   identity_name: BlockRockingBytes.Melophily
   publisher: CN=D4F08B06-6E8B-41B0-A62A-9E76FDBBA164
-  msix_version: 2.5.0.0
+  msix_version: 2.5.1.0
   logo_path: screenshots\onlyaudio_cover_600x600.png
   capabilities: privateNetworkClientServer
   languages: fr-fr, en-us

@@ -10,6 +10,7 @@ import '../../../core/services/storage_service.dart';
 import '../../library/data/library_service.dart';
 import '../data/audio_service.dart';
 import '../data/metadata_service.dart';
+import 'next_track_planner.dart';
 
 class PlayerController extends ChangeNotifier {
   PlayerController({
@@ -38,7 +39,8 @@ class PlayerController extends ChangeNotifier {
   bool _isPaused = true;
   Duration _currentPosition = Duration.zero;
   Duration _currentDuration = Duration.zero;
-  int? _preloadedNextIndex;
+  final NextTrackPlanner _nextPlanner = NextTrackPlanner();
+  bool _hasPlayed = false; // something was loaded: a re-decided next track is worth pre-loading
   String _cachedCoverPath = '';
   String _cachedCoverB64 = '';
 
@@ -65,19 +67,22 @@ class PlayerController extends ChangeNotifier {
           : null;
 
   // La piste que jouera le bouton "suivant" (ou la fin naturelle du titre) :
-  // en mode Répéter c'est la piste courante qui rejoue, sinon celle déjà
-  // choisie par _schedulePreload (respecte l'aléatoire).
+  // en mode Répéter c'est la piste courante qui rejoue, sinon celle retenue par
+  // le planificateur. Le choix est stable (même réponse à chaque lecture) : l'UI
+  // relit cette valeur à chaque rafraîchissement, un tirage aléatoire par lecture
+  // faisait défiler « À suivre » comme une loterie.
   Track? get nextTrack {
     if (_playlist.length < 2) return null;
     if (_state.isRepeat) return currentTrack;
-    final idx = _preloadedNextIndex ??
-        _audioService.nextIndex(
-          currentIndex: _state.currentIndex,
-          length: _playlist.length,
-          shuffled: _state.isShuffled,
-        );
-    return idx < _playlist.length ? _playlist[idx] : null;
+    final idx = _planNext();
+    return idx == null ? null : _playlist[idx];
   }
+
+  int? _planNext() => _nextPlanner.plan(
+        current: _state.currentIndex,
+        length: _playlist.length,
+        shuffled: _state.isShuffled,
+      );
 
   List<int> get visibleIndices {
     final indices = List<int>.generate(_playlist.length, (i) => i);
@@ -191,13 +196,53 @@ class PlayerController extends ChangeNotifier {
     await _addTrackPaths(paths);
   }
 
+  /// Files and folders dropped on the window: the way in when the system folder dialog fails.
+  Future<void> addDropped(List<String> dropped) async {
+    if (_isImporting) return;
+    final paths = await _libraryService.expandDropped(dropped);
+    await _addTrackPaths(paths);
+  }
+
+  // Import progress, for the UI (a big folder takes a while: tags are read off the UI isolate).
+  bool _isImporting = false;
+  int _importGeneration = 0; // clearPlaylist bumps it: the import in flight stops and adds nothing
+  int _importDone = 0;
+  int _importTotal = 0;
+  bool get isImporting => _isImporting;
+  int get importDone => _importDone;
+  int get importTotal => _importTotal;
+
   Future<void> _addTrackPaths(List<String> paths) async {
-    if (paths.isEmpty) return;
+    if (paths.isEmpty || _isImporting) return;
     final known = _playlist.map((e) => e.path).toSet();
+    final fresh = <String>[];
     for (final path in paths) {
-      if (known.contains(path)) continue;
-      known.add(path);
-      _playlist.add(await _metadataService.fromPath(path));
+      if (known.add(path)) fresh.add(path);
+    }
+    if (fresh.isEmpty) return;
+    final generation = ++_importGeneration;
+    bool cancelled() => generation != _importGeneration;
+    _isImporting = true;
+    _importDone = 0;
+    _importTotal = fresh.length;
+    notifyListeners();
+    try {
+      await _metadataService.fromPaths(
+        fresh,
+        isCancelled: cancelled,
+        onBatch: (batch, done, total) {
+          if (cancelled()) return;
+          _playlist.addAll(batch);
+          _importDone = done;
+          notifyListeners();
+        },
+      );
+    } finally {
+      _isImporting = false;
+    }
+    if (cancelled()) {
+      notifyListeners();
+      return;
     }
     await _persist();
     notifyListeners();
@@ -215,6 +260,7 @@ class PlayerController extends ChangeNotifier {
     _currentDuration = Duration.zero;
     _currentPosition = Duration.zero;
     _isPaused = false;
+    _hasPlayed = true;
     notifyListeners(); // Met à jour l'UI immédiatement (titre, pochette)
     try {
       await _audioService.playTrack(track, initialPosition: seekTo);
@@ -227,13 +273,8 @@ class PlayerController extends ChangeNotifier {
   }
 
   void _schedulePreload() {
-    if (_playlist.length < 2) return;
-    final nextIdx = _audioService.nextIndex(
-      currentIndex: _state.currentIndex,
-      length: _playlist.length,
-      shuffled: _state.isShuffled,
-    );
-    _preloadedNextIndex = nextIdx;
+    final nextIdx = _planNext();
+    if (nextIdx == null) return;
     unawaited(_audioService.preloadNext(_playlist[nextIdx]));
   }
 
@@ -252,15 +293,12 @@ class PlayerController extends ChangeNotifier {
 
   Future<void> next() async {
     if (_playlist.isEmpty) return;
-    final idx =
-        (_preloadedNextIndex != null && _preloadedNextIndex! < _playlist.length)
-            ? _preloadedNextIndex!
-            : _audioService.nextIndex(
-                currentIndex: _state.currentIndex,
-                length: _playlist.length,
-                shuffled: _state.isShuffled,
-              );
-    _preloadedNextIndex = null;
+    final idx = _planNext() ??
+        _audioService.nextIndex(
+          currentIndex: _state.currentIndex,
+          length: _playlist.length,
+          shuffled: _state.isShuffled,
+        );
     await playAt(idx);
   }
 
@@ -291,6 +329,8 @@ class PlayerController extends ChangeNotifier {
     _state.isShuffled = !_state.isShuffled;
     await _persist();
     notifyListeners();
+    // Le choix du suivant change avec le mode : on recharge celui qui sera réellement joué.
+    if (_hasPlayed) _schedulePreload();
   }
 
   Future<void> toggleRepeat() async {
@@ -317,6 +357,7 @@ class PlayerController extends ChangeNotifier {
     if (_playlist.isEmpty) return;
     final removed = _state.currentIndex;
     _playlist.removeAt(removed);
+    _nextPlanner.invalidate(); // les index ont bougé
     if (_playlist.isEmpty) {
       _state.currentIndex = 0;
       _state.positionMs = 0;
@@ -333,7 +374,9 @@ class PlayerController extends ChangeNotifier {
   }
 
   Future<void> clearPlaylist() async {
+    _importGeneration++; // an import still reading tags must not refill the list
     _playlist.clear();
+    _nextPlanner.invalidate();
     _state.currentIndex = 0;
     _state.positionMs = 0;
     _isPaused = true;
@@ -356,6 +399,7 @@ class PlayerController extends ChangeNotifier {
       final bytes = await _metadataService.coverBytes(current.path);
       _cachedCoverB64 = bytes != null ? base64Encode(bytes) : '';
     }
+    final next = nextTrack; // une seule lecture : titre et artiste du même morceau
     return {
       'title': current?.title ?? '',
       'artist': current?.artist ?? '',
@@ -366,8 +410,8 @@ class PlayerController extends ChangeNotifier {
       'cover_b64': _cachedCoverB64,
       'is_playing': !_isPaused,
       'index': _state.currentIndex,
-      'next_title': nextTrack?.title ?? '',
-      'next_artist': nextTrack?.artist ?? '',
+      'next_title': next?.title ?? '',
+      'next_artist': next?.artist ?? '',
     };
   }
 

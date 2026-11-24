@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:io';
 import 'dart:math';
 
+import 'package:desktop_drop/desktop_drop.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
@@ -88,6 +89,7 @@ class _PlayerPageState extends State<PlayerPage> {
   int _focusedVisibleIndex = -1;
   int _lastCurrentIndex = -1;
   double? _seekingValue; // valeur locale pendant le drag du slider
+  bool _isDragging = false;
   bool _isFullScreen = false;
   bool _playlistVisible = true;
   bool _controlsVisible = true;
@@ -210,7 +212,35 @@ class _PlayerPageState extends State<PlayerPage> {
         },
         child: AnimatedBuilder(
           animation: _controller,
-          builder: (context, _) => _buildScaffold(context),
+          builder: (context, _) => DropTarget(
+            onDragEntered: (_) => setState(() => _isDragging = true),
+            onDragExited: (_) => setState(() => _isDragging = false),
+            onDragDone: (details) {
+              setState(() => _isDragging = false);
+              _controller.addDropped(details.files.map((f) => f.path).toList());
+            },
+            child: Stack(
+              children: [
+                _buildScaffold(context),
+                if (_isDragging)
+                  Positioned.fill(
+                    child: IgnorePointer(
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color: const Color(0x99000000),
+                          border: Border.all(color: _kCyan, width: 3),
+                        ),
+                        alignment: Alignment.center,
+                        child: const Text(
+                          'Déposer des fichiers ou un dossier',
+                          style: TextStyle(color: _kCyan, fontSize: 20),
+                        ),
+                      ),
+                    ),
+                  ),
+              ],
+            ),
+          ),
         ),
       ),
     );
@@ -426,11 +456,16 @@ class _PlayerPageState extends State<PlayerPage> {
           child: Row(
             children: [
               Expanded(
-                  child: _darkBtn('+FICHIER', () => _controller.addFiles(),
+                  child: _darkBtn('+FICHIER',
+                      _controller.isImporting ? null : () => _controller.addFiles(),
                       fg: _kCyan)),
               const SizedBox(width: 4),
               Expanded(
-                  child: _darkBtn('+DOSSIER', () => _controller.addFolder(),
+                  child: _darkBtn(
+                      _controller.isImporting
+                          ? '${_controller.importDone}/${_controller.importTotal}'
+                          : '+DOSSIER',
+                      _controller.isImporting ? null : () => _controller.addFolder(),
                       fg: _kCyan)),
               const SizedBox(width: 4),
               Expanded(

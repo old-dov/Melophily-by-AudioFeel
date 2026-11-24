@@ -5,28 +5,18 @@ import 'package:media_kit/media_kit.dart';
 import 'package:window_manager/window_manager.dart';
 
 import 'app/only_audio_app.dart';
-
-ServerSocket? _singleInstanceGuard;
-
-Future<bool> _acquireSingleInstanceGuard() async {
-  try {
-    _singleInstanceGuard = await ServerSocket.bind(
-      InternetAddress.loopbackIPv4,
-      43157,
-      shared: false,
-    );
-    assert(_singleInstanceGuard != null);
-    return true;
-  } on SocketException {
-    return false;
-  }
-}
+import 'core/single_instance_guard.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  if (!await _acquireSingleInstanceGuard()) {
-    debugPrint('Melophily is already running. Exiting duplicate instance.');
-    return;
+  switch (await SingleInstanceGuard.acquire()) {
+    case GuardResult.alreadyRunning:
+      debugPrint('Melophily is already running. Exiting duplicate instance.');
+      exit(0); // a plain `return` left a windowless process behind
+    case GuardResult.unavailable:
+      debugPrint('Single-instance guard unavailable on this machine: starting anyway.');
+    case GuardResult.acquired:
+      break;
   }
   MediaKit.ensureInitialized();
   await windowManager.ensureInitialized();
