@@ -5,8 +5,9 @@ import 'dart:math' as math;
 /// The choice must be stable: the UI reads "up next" on every rebuild and the audio layer
 /// pre-loads that same track, so a fresh random draw per read made the line spin like a lottery
 /// until playback fixed it, and could even show a title and an artist of two different tracks.
-/// The answer only changes when the current track, the shuffle flag or the playlist length does,
-/// or when [invalidate] is called.
+/// The answer only changes when the current track or the shuffle flag does, when the playlist shrinks
+/// below it (or, in order, changes length), or when [invalidate] is called. In shuffle a longer list
+/// keeps the choice already made.
 class NextTrackPlanner {
   NextTrackPlanner({math.Random? random}) : _random = random ?? math.Random();
 
@@ -27,17 +28,21 @@ class NextTrackPlanner {
       _next = null;
       return null;
     }
+    // A longer playlist (a big folder being imported in batches while a track already plays)
+    // must not re-roll a shuffle choice that is still valid, or "up next" would spin at every
+    // batch. In order, the answer is a plain function of the length, so it is recomputed.
+    final grew = _length != length;
     final stale = _next == null ||
         _current != current ||
-        _length != length ||
         _shuffled != shuffled ||
-        _next! >= length;
+        _next! >= length ||
+        (grew && !shuffled);
     if (stale) {
-      _current = current;
-      _length = length;
-      _shuffled = shuffled;
       _next = shuffled ? _pickOther(current, length) : (current + 1) % length;
     }
+    _current = current;
+    _length = length;
+    _shuffled = shuffled;
     return _next;
   }
 

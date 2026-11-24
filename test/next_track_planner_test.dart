@@ -86,4 +86,18 @@ void main() {
     expect(plan(p, current: 0, length: 1, shuffled: false), isNull);
     expect(plan(p, current: 0, length: 2, shuffled: true), 1);
   });
+
+  test('a playlist that keeps growing (batched import) does not re-roll the shuffle choice', () {
+    final p = NextTrackPlanner(random: Random(4));
+    final first = plan(p, current: 0, length: 40)!;
+    for (var length = 41; length <= 2800; length += 40) {
+      expect(plan(p, current: 0, length: length), first);
+    }
+  });
+
+  test('in order, a longer playlist is still followed correctly at the end of the list', () {
+    final p = NextTrackPlanner();
+    expect(plan(p, current: 4, length: 5, shuffled: false), 0);
+    expect(plan(p, current: 4, length: 9, shuffled: false), 5);
+  });
 }
