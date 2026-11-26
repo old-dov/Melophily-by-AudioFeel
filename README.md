@@ -5,6 +5,8 @@
 
 Lecteur audio desktop Windows & macOS avec télécommande Android.
 
+> **Vieux PC Linux 32 bits ?** Une version légère, sans télécommande Android, est proposée à part : [Melophily Legacy](https://github.com/old-dov/Melophily-Legacy).
+
 ![Windows](https://img.shields.io/badge/Windows-10%2F11-blue?logo=windows)
 ![macOS](https://img.shields.io/badge/macOS-10.14%2B-lightgrey?logo=apple)
 ![Linux](https://img.shields.io/badge/Linux-x64-orange?logo=linux)
@@ -180,3 +182,9 @@ flutter build apk --release
 ## Auteur
 
 **AudioFeel** — © 2026
+
+---
+
+## Licence
+
+[MIT](LICENSE)
