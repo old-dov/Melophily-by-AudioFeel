@@ -11,4 +11,4 @@ PRODUCT_NAME = OnlyAudio
 PRODUCT_BUNDLE_IDENTIFIER = com.audiofeel.onlyaudio
 
 // The copyright displayed in application information
-PRODUCT_COPYRIGHT = Copyright © 2026 AudioFeel. All rights reserved.
+PRODUCT_COPYRIGHT = Copyright © 2026 AudioFeel. MIT License.
